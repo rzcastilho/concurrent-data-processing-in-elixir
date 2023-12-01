@@ -17,4 +17,13 @@ defmodule PageProducer do
     events = []
     {:noreply, events, state}
   end
+
+  def handle_cast({:pages, pages}, state) do
+    {:noreply, pages, state}
+  end
+
+  def scrape_pages(pages) when is_list(pages) do
+    GenStage.cast(__MODULE__, {:pages, pages})
+  end
+
 end
